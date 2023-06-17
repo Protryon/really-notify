@@ -1,0 +1,27 @@
+[package]
+name = "really-notify"
+version = "0.1.0"
+edition = "2021"
+authors = ["Protryon <max.bruce12@gmail.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/Protryon/really-notify"
+description = "For when you really, really just want to know that your config changed"
+keywords = [ "inotify", "notify", "reload" ]
+
+[dependencies]
+log = "0.4"
+tokio = { "version" = "1", features = ["full"] }
+thiserror = "1.0"
+futures = "0.3"
+notify = { version = "6.0", optional = true }
+libc = { version = "0.2", optional = true }
+bitmask-enum = { version = "2.1.0", optional = true }
+async-stream = { version = "0.3.5", optional = true }
+
+[dev-dependencies]
+env_logger = "0.10.0"
+
+[features]
+notify = ["dep:notify"]
+inotify = ["libc", "bitmask-enum", "async-stream"]
+default = ["inotify"]
